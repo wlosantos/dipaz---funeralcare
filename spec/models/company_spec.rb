@@ -30,17 +30,42 @@ RSpec.describe Company, type: :model do
     it { is_expected.to define_enum_for(:status).with_values(%i[active blocked]) }
   end
 
-  describe '#approved_cnpj?' do
-    context 'valid' do
-      let(:company) { build(:company) }
-      it { expect(company.approved_cnpj?).to be_truthy }
+  describe 'persisted database' do
+    context 'successfully' do
+      let(:company) { create(:company) }
+      let(:data) { Company.last }
+      before do
+        company
+        data
+      end
+      it 'created' do
+        expect(company).to be_valid
+      end
+      it 'find company' do
+        expect(data.name).to eq(company.name)
+      end
     end
-    context 'invalid' do
-      let(:company) { build(:company, cnpj: '111') }
-      before { company.save }
-      it { expect(company.approved_cnpj?).to be_falsy }
-      it { expect(company.errors.full_messages).to include('Cnpj precisa ser preenchido corretamente') }
-      it { expect(company.errors.full_messages).to include('Cnpj inválido!') }
+
+    context 'failure - Record::Invalid' do
+      let(:company) { create(:company, name: '') }
+      it 'can\'t be blank' do
+        expect { company }.to raise_error(ActiveRecord::RecordInvalid)
+      end
+    end
+
+    context 'failure - CNPJ já cadastrado' do
+      let(:company) { create(:company, cnpj: '11.006.382/0001-87') }
+      let(:company2) { create(:company, cnpj: '11.006.382/0001-87') }
+      before do
+        company
+      end
+
+      it '' do
+        expect do
+          company2
+        end.to raise_error(ActiveRecord::RecordInvalid,
+                           'Validation failed: Cnpj já cadastrado!, Cnpj Empresa já cadastrada com esse CNPJ')
+      end
     end
   end
 end
