@@ -7,7 +7,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'puma', '~> 5.0'
 gem 'rails', '~> 6.1.4', '>= 6.1.4.1'
 
-# gem 'cpf_cnpj'
+gem 'cpf_cnpj'
 # gem 'devise_token_auth', github: 'lynndylanhurley/devise_token_auth', branch: 'master'
 # gem 'rolify'
 

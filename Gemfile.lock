@@ -76,6 +76,7 @@ GEM
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
     concurrent-ruby (1.1.9)
+    cpf_cnpj (0.5.0)
     crass (1.0.6)
     database_cleaner (2.0.1)
       database_cleaner-active_record (~> 2.0.0)
@@ -259,6 +260,7 @@ DEPENDENCIES
   awesome_print
   bootsnap (>= 1.4.4)
   byebug
+  cpf_cnpj
   database_cleaner
   dotenv-rails
   factory_bot_rails (~> 6.1)
