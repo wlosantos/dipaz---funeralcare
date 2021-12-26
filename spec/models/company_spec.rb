@@ -30,6 +30,10 @@ RSpec.describe Company, type: :model do
     it { is_expected.to define_enum_for(:status).with_values(%i[active blocked]) }
   end
 
+  describe 'relationship' do
+    it { is_expected.to have_many :users }
+  end
+
   describe 'persisted database' do
     context 'successfully' do
       let(:company) { create(:company) }
