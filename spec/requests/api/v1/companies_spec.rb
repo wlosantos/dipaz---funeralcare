@@ -1,20 +1,23 @@
 require 'rails_helper'
 
-RSpec.describe 'Companies', type: :request do
+RSpec.describe 'Companies', :focus, type: :request do
+  let(:company) { create(:company, :active) }
+  let(:auth_data) { user.create_new_auth_token }
+  let(:user) { create(:user, company: company) }
   let(:headers) do
     {
       'Accept': 'application/vnd.dipaz.v1',
-      'Content-Type': Mime[:json].to_s
-      # 'access-token': auth_data['access-token'],
-      # 'uid': auth_data['uid'],
-      # 'client': auth_data['client']
+      'Content-Type': Mime[:json].to_s,
+      'access-token': auth_data['access-token'],
+      'uid': auth_data['uid'],
+      'client': auth_data['client']
     }
   end
 
   describe 'GET /companies' do
     context 'successfully' do
-      let(:company) { create(:company, :active) }
       before do
+        sign_in user
         company
         get '/companies', params: {}, headers: headers
       end
@@ -40,7 +43,6 @@ RSpec.describe 'Companies', type: :request do
   end
 
   describe 'PUT /companies/:id' do
-    let(:company) { create(:company, :active) }
     before do
       company
       put "/companies/#{company.id}", params: params_company.to_json, headers: headers

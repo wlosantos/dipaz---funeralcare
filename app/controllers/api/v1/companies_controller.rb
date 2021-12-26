@@ -1,9 +1,9 @@
 module Api
   module V1
     # adding controller of companies
-    class CompaniesController < ApplicationController
+    class CompaniesController < BasicController
       def index
-        company = Company.first
+        company = current_user.company
         if company.active?
           render json: { company: company }, status: :ok
         else
