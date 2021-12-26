@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class User < ActiveRecord::Base
-  belongs_to :company
+  rolify
+  belongs_to :company, inverse_of: :users
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -12,4 +13,10 @@ class User < ActiveRecord::Base
 
   validates :name, presence: true
   validates :phone, presence: true
+
+  # after_create :assign_default_role
+
+  # def assign_default_role
+  #   add_role(:client) if roles.blank?
+  # end
 end

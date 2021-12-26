@@ -14,5 +14,17 @@ FactoryBot.define do
     trait :email_invalid do
       email { 'invalid@' }
     end
+
+    trait :admin do
+      after :create do |user|
+        user.add_role :admin
+      end
+    end
+
+    trait :client do
+      after :create do |user|
+        user.add_role :client
+      end
+    end
   end
 end
