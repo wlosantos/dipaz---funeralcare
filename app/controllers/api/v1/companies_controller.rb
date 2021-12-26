@@ -11,6 +11,8 @@ module Api
         end
       end
 
+      def show; end
+
       def update
         company = Company.find(params[:id])
         if company.update(params_company)

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Register, :focus, type: :model do
+RSpec.describe Register, type: :model do
   context 'indexes' do
     it { is_expected.to have_db_index(:company_id) }
     it { is_expected.to have_db_index(:cpf).unique(true) }
