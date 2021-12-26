@@ -41,4 +41,32 @@ RSpec.describe 'Registers', :focus, type: :request do
       it { expect(response).to have_http_status :unauthorized }
     end
   end
+
+  describe 'GET /companies/:id/registers/:id' do
+    let(:register) { create(:register, company: company) }
+
+    context 'successfully' do
+      before do
+        get "/companies/#{company.id}/registers/#{register.id}", params: {}, headers: headers
+      end
+
+      it 'returns status code 200' do
+        expect(response).to have_http_status :ok
+      end
+      it 'returns json data' do
+        expect(json_body[:register]).to have_key(:name)
+      end
+    end
+
+    context 'failure' do
+      before { get "/companies/#{company.id}/registers/1000", params: {}, headers: headers }
+
+      it 'returns status code 422' do
+        expect(response).to have_http_status :unprocessable_entity
+      end
+      it 'returns error message' do
+        expect(json_body[:errors]).to eq('Registro não cadastrado!')
+      end
+    end
+  end
 end
