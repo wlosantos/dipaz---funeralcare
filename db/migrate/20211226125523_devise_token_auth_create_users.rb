@@ -25,6 +25,7 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration[6.1]
       t.string :email, null: false, default: ''
       t.string :name, null: false, default: ''
       t.string :phone, null: false, default: ''
+      t.integer :status, default: 0
 
       ## Tokens
       t.text :tokens

@@ -7,6 +7,8 @@
           1,
           null,
           1,
+          null,
+          1,
           1,
           null,
           null,
@@ -50,6 +52,45 @@
         "lines": [
           1,
           1,
+          null
+        ]
+      },
+      "/home/wendellopes/projects/dipaz-api/spec/models/user_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          2,
+          null,
+          null,
+          1,
+          2,
+          2,
+          2,
+          null,
+          null,
+          1,
+          4,
+          null,
+          2,
+          2,
+          2,
+          null,
+          null,
+          1,
+          2,
+          2,
+          2,
+          null,
+          null,
+          1,
+          2,
+          null,
+          null,
+          1,
+          2,
+          null,
           null
         ]
       },
@@ -163,10 +204,19 @@
       "/home/wendellopes/projects/dipaz-api/app/controllers/application_controller.rb": {
         "lines": [
           1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          0,
+          null,
           null
         ]
       }
     },
-    "timestamp": 1640522365
+    "timestamp": 1640534219
   }
 }

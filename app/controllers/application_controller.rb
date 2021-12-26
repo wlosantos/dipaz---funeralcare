@@ -6,6 +6,6 @@ class ApplicationController < ActionController::API
   private
 
   def configure_permited_parameters
-    devise_parameter_sanitizer.permit :sign_up, keys: %i[name phone]
+    devise_parameter_sanitizer.permit :sign_up, keys: %i[name phone status]
   end
 end

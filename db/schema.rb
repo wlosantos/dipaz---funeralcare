@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 2021_12_26_131713) do
     t.string "email", default: "", null: false
     t.string "name", default: "", null: false
     t.string "phone", default: "", null: false
+    t.integer "status", default: 0
     t.text "tokens"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
