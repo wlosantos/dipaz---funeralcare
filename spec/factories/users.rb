@@ -4,7 +4,6 @@ FactoryBot.define do
     email { Faker::Internet.email }
     phone { Faker::PhoneNumber.phone_number }
     password { '123456' }
-    password_confirmation { '123456' }
     status { 'active' }
     company
 
