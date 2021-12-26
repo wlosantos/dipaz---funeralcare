@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Companies', :focus, type: :request do
+RSpec.describe 'Companies', type: :request do
   let(:company) { create(:company, :active) }
   let(:auth_data) { user.create_new_auth_token }
   let(:user) { create(:user, company: company) }
