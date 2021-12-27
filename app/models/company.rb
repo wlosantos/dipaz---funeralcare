@@ -1,5 +1,6 @@
 class Company < ApplicationRecord
   has_many :users, dependent: :destroy
+  has_many :registers, dependent: :destroy
 
   enum status: %i[active blocked]
 
