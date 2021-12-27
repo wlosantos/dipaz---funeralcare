@@ -97,4 +97,34 @@ RSpec.describe 'Registers', :focus, type: :request do
       end
     end
   end
+
+  describe 'PUT /companies/:id/registers/:id' do
+    let(:register) { create(:register) }
+    before do
+      register
+      put "/companies/#{company.id}/registers/#{register.id}", params: params_register.to_json, headers: headers
+    end
+
+    context 'update successfully' do
+      let(:params_register) { { name: 'Ronaldo Vieira da Silva', rg: '362.321.84' } }
+
+      it 'returns status code 200' do
+        expect(response).to have_http_status :ok
+      end
+      it 'return json data register' do
+        expect(json_body[:register][:name]).to eq(params_register[:name])
+      end
+    end
+
+    context 'update - failure' do
+      let(:params_register) { { accession_at: '' } }
+
+      it 'returns status code 422' do
+        expect(response).to have_http_status :unprocessable_entity
+      end
+      it 'return message errors' do
+        expect(json_body[:errors]).to include("Accession at can't be blank")
+      end
+    end
+  end
 end
