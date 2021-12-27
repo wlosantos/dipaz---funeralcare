@@ -16,10 +16,23 @@ module Api
         render json: { errors: 'Registro não cadastrado!' }, status: :unprocessable_entity
       end
 
+      def create
+        register = @company.registers.build(params_register)
+        if register.save
+          render json: { register: register }, status: :created
+        else
+          render json: { errors: register.errors.full_messages }, status: :unprocessable_entity
+        end
+      end
+
       private
 
       def set_company
         @company = current_user.company
+      end
+
+      def params_register
+        params.require(:register).permit(:name, :birthday, :cpf, :rg, :accession_at, :plan, :status)
       end
     end
   end
