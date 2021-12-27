@@ -35,6 +35,13 @@ module Api
         end
       end
 
+      def destroy
+        register = Register.find(params[:id])
+        head :not_found if register.destroy
+      rescue StandardError
+        head :unprocessable_entity
+      end
+
       private
 
       def set_company

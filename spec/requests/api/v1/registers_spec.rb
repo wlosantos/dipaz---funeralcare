@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Registers', :focus, type: :request do
+RSpec.describe 'Registers', type: :request do
   let(:company) { create(:company, :active) }
   let(:auth_data) { user.create_new_auth_token }
   let(:user) { create(:user, company: company) }
@@ -124,6 +124,34 @@ RSpec.describe 'Registers', :focus, type: :request do
       end
       it 'return message errors' do
         expect(json_body[:errors]).to include("Accession at can't be blank")
+      end
+    end
+  end
+
+  describe 'DELETE /companies/:id/registers/:id' do
+    let(:register) { create(:register) }
+
+    context 'successfully' do
+      before do
+        register
+        delete "/companies/#{company.id}/registers/#{register.id}", params: {}, headers: headers
+      end
+
+      it 'returns status code 204' do
+        expect(response).to have_http_status :not_found
+      end
+      it 'confirmed delete register' do
+        expect(Register.last).to_not eq(register)
+      end
+    end
+
+    context 'failure' do
+      before do
+        register
+        delete "/companies/#{company.id}/registers/1000", params: {}, headers: headers
+      end
+      it 'returns status code 422' do
+        expect(response).to have_http_status :unprocessable_entity
       end
     end
   end
