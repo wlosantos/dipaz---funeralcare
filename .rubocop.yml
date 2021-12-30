@@ -5,7 +5,8 @@
 #  - rubocop-rails
 
 AllCops:
-  TargetRubyVersion: 2.5
+  TargetRubyVersion: 3.0
+  TargetRailsVersion: 6.1
 
 Documentation:
   Enabled: false
@@ -15,6 +16,9 @@ Style/FrozenStringLiteralComment:
 
 Metrics/BlockLength:
   ExcludedMethods: ["describe", "context", "feature", "scenario", "let"]
+
+Metrics/MethodLength:
+  Max: 1000
 
 Metrics/LineLength:
   Max: 120

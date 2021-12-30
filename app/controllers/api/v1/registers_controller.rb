@@ -5,13 +5,13 @@ module Api
       before_action :set_company
 
       def index
-        register = @company.registers.all
-        render json: { register: register }, status: :ok
+        register = RegisterPresenter.new(@company.registers.all)
+        render json: { registers: register.list }, status: :ok
       end
 
       def show
-        register = Register.find(params[:id])
-        render json: { register: register }, status: :ok
+        register = RegisterPresenter.new(Register.find(params[:id]))
+        render json: { register: register.description }, status: :ok
       rescue StandardError
         render json: { errors: 'Registro não cadastrado!' }, status: :unprocessable_entity
       end
@@ -19,7 +19,8 @@ module Api
       def create
         register = @company.registers.build(params_register)
         if register.save
-          render json: { register: register }, status: :created
+          new_register = RegisterPresenter.new(register)
+          render json: { register: new_register.description }, status: :created
         else
           render json: { errors: register.errors.full_messages }, status: :unprocessable_entity
         end

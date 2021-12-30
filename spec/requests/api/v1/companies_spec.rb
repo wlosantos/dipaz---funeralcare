@@ -57,14 +57,9 @@ RSpec.describe 'Companies', type: :request do
     end
 
     context 'failure' do
-      context 'not permited parametes' do
-        let(:params_company) { attributes_for(:company, cnpj: '11.006.382/0001-87') }
-        it { expect(json_body[:company][:cnpj]).to_not eq(params_company[:cnpj]) }
-      end
-      context 'can not be blank or nil' do
-        let(:params_company) { attributes_for(:company, name: '') }
-        it { expect(json_body[:errors][:message].to_sentence).to eq("Name can't be blank") }
-        it { expect(response).to have_http_status :unprocessable_entity }
+      let(:params_company) { attributes_for(:company, cnpj: '11.006.382/0001-87') }
+      it 'parameters not permited' do
+        expect(json_body[:company][:cnpj]).to_not eq(params_company[:cnpj])
       end
     end
   end
