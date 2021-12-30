@@ -25,10 +25,7 @@ class Register < ApplicationRecord
   end
 
   def cpf_not_exists?
-    return true if Register.where(cpf: cpf).first.nil?
-
-    errors.add(:cpf, 'já cadastrado!')
-    false
+    Register.where(cpf: cpf).first.nil?
   end
 
   def cpf_approved?

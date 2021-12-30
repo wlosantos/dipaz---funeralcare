@@ -23,11 +23,11 @@ RSpec.describe 'Registers', type: :request do
       end
 
       it { expect(response).to have_http_status :ok }
-      it { expect(json_body[:register][0]).to have_key(:name) }
-      it { expect(json_body[:register][0]).to have_key(:cpf) }
-      it { expect(json_body[:register][0]).to have_key(:accession_at) }
+      it { expect(json_body[:registers][0]).to have_key(:name) }
+      it { expect(json_body[:registers][0]).to have_key(:cpf) }
+      it { expect(json_body[:registers][0]).to have_key(:accession_at) }
       it 'returns list json data' do
-        expect(json_body[:register].count).to eq(20)
+        expect(json_body[:registers].count).to eq(20)
       end
     end
 
